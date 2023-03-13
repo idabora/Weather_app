@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Weather app</title>
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="wave1"></div>
+        <div class="wave2"></div>
+        <div class="wave3"></div>
+
+        <div id="weathercondition">
+            <!-- <i class="fa-solid fa-sun" style="color:yellow"></i> -->
+            <i class="fa-solid fa-clouds" style='color:blue'></i>
+        </div>
+
+        <div class="info">
+            <h2 class="location">
+                {%location%}|{%country%}
+            </h2>
+            <p id="date">12 Feb 2023 | 08:00 PM</p>
+            <!-- <br> -->
+            <h1 class="temp">{%temprature%}&deg;C</h1>
+            <p class="maxmin">Max{%tempmax%}&deg;C |Min{%tempmin%}&deg;C</p>
+        </div>
+
+
+    </div>
+
+    <script>
+        var curdate = new Date();
+        const datetag = document.getElementById("date");
+        const wheatherstatus = document.getElementById('weathercondition');
+
+        let tempstatus = "{%tempstatus%}";
+
+        if (tempstatus == "Clear") {
+            wheatherstatus.innerHTML = "<i class='fa-solid fa-sun' style='color:yellow'></i>";
+        }
+        else if (tempstatus == "Rain") {
+            wheatherstatus.innerHTML = "<i class='fa-duotone fa-cloud-rain'></i>";
+
+        }
+        else if (tempstatus == 'Snow') {
+            wheatherstatus.innerHTML = "<i class='fa-solid fa-snowflake'></i>";
+
+        }
+        else if (tempstatus == "Drizzle") {
+            wheatherstatus.innerHTML = "<i class='fa-duotone fa-raindrops'></i>";
+
+        }
+        else if (tempstatus == "Thunderstorm") {
+            wheatherstatus.innerHTML = "<i class='fa-duotone fa-cloud-bolt'></i>";
+
+        }
+        else if (tempstatus == "Clouds") {
+            wheatherstatus.innerHTML = "<i class='fa-solid fa-clouds'></i>";
+
+        }
+        else {
+            // wheatherstatus.innerHTML = "<i class='fa-solid fa-sun' style='color:yellow'></i>";
+            wheatherstatus.innerHTML = "<i class='fa-solid fa-clouds' style='color:blue'></i>";
+
+
+        }
+
+        // const getcurday=()=>{
+
+
+            //     // let time=new Date();
+            //     console.log(weekday[curdate.getDay()]);
+            //     var weekday=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+            
+            // }
+            
+            const getdate = () => {
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            var month = months[curdate.getMonth()];
+            var date = curdate.getDate();
+            var year = curdate.getFullYear();
+            var hours = curdate.getHours();
+            var mins = curdate.getMinutes();
+
+            var v = "AM";
+            if (hours > 11) {
+                v = "PM";
+                if (hours > 11)
+                    hours = hours - 12;
+
+                }
+                if (hours < 10) {
+                hours = "0" + hours;
+            }
+            
+            if (mins < 10) {
+                mins = "0" + mins;
+            }
+            // 12 Feb 2023 | 08:00 PM
+            console.log(`${date} ${month} ${year} | ${hours}:${mins} ${v}`);
+            return (`${date} ${month} ${year} | ${hours}:${mins} ${v}`);
+        }
+        datetag.innerHTML = getdate();
+        
+        
+        // getdate();
+        // getcurday();
+
+
+    </script>
+    <!-- <script src="index.js"></script> -->
+</body>
+
+</html>
